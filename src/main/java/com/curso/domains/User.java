@@ -13,12 +13,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Entity
-@Table(name = "users")
+
 public class User extends Person {
 
     @JsonIgnore
-    @OneToMany(mappedBy = "users")
-    private List<ServiceOrder> serviceOrders = new ArrayList<>();
+    @OneToMany(mappedBy = "user")
+    private List<ServiceOrder> serviceOrders;
 
     public User(Long id, String firstName, String lastName, String cpf, String email, String password) {
         super(id, firstName, lastName, cpf, email, password);

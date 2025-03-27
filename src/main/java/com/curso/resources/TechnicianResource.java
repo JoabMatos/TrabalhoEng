@@ -28,19 +28,19 @@ public class TechnicianResource {
     @GetMapping(value = "/{id}")
     public ResponseEntity<TechnicianDTO> findById(@PathVariable Long id) {
 
-        Technician obj = this.techService.findById(id);
+        Technician obj = this.techService.findbyId(id);
         return ResponseEntity.ok().body(new TechnicianDTO(obj));
     }
 
     @GetMapping(value = "/cpf/{cpf}")
     public ResponseEntity<TechnicianDTO> findByCpf(@PathVariable String cpf) {
-        Technician obj = this.techService.findByCpf(cpf);
+        Technician obj = this.techService.findbyCpf(cpf);
         return ResponseEntity.ok().body(new TechnicianDTO(obj));
     }
 
     @GetMapping(value = "/email/{email}")
     public ResponseEntity<TechnicianDTO> findByEmail(@PathVariable String email) {
-        Technician obj = this.techService.findByEmail(email);
+        Technician obj = this.techService.findbyEmail(email);
         return ResponseEntity.ok().body(new TechnicianDTO(obj));
     }
     @PostMapping

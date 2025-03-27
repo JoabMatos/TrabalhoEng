@@ -27,7 +27,7 @@ public class ServiceOrderResource {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<ServiceOrderDTO> findById(@PathVariable UUID id) {
-        ServiceOrder obj = this.osService.findById(id);
+        ServiceOrder obj = this.osService.findbyId(id);
         return ResponseEntity.ok().body(new ServiceOrderDTO(obj));
     }
 

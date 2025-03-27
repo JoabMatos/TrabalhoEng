@@ -26,17 +26,17 @@ public class UserService {
                 .map(obj -> new UserDTO(obj)).collect(Collectors.toList());
     }
 
-    public User findById(Long id) {
+    public User findbyId(Long id) {
         Optional<User> obj = usersRepo.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id:" + id));
     }
 
-    public User findByCpf(String cpf) {
-        Optional<User> obj = usersRepo.findBycpf(cpf);
+    public User findbyCpf(String cpf) {
+        Optional<User> obj = usersRepo.findByCpf(cpf);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! CPF:" + cpf));
     }
 
-    public User findByEmail(String email) {
+    public User findbyEmail(String email) {
         Optional<User> obj = usersRepo.findByEmail(email);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Email:" + email));
     }
@@ -52,27 +52,27 @@ public class UserService {
 
     public User update(Long id ,UserDTO objDto) {
         objDto.setId(id);
-        User oldObj=findById(id);
+        User oldObj=findbyId(id);
         ValidaPorCPFeEmail(objDto);
         oldObj=new User(objDto);
         return usersRepo.save(oldObj);
     }
     public void delete(Long id) {
-        User obj=findById(id);
+        User obj=findbyId(id);
         if(obj.getServiceOrders().size()>0){
-            throw new DataIntegrityViolationException("Técnico não pode ser deletado pois possui ordens de serviço!");
+            throw new DataIntegrityViolationException("Úsuario não pode ser deletado pois possui ordens de serviço!");
         }
-        usersRepo.delete(obj);
+        usersRepo.deleteById(id);
 
 
     }
     private void ValidaPorCPFeEmail(UserDTO objDto) {
-        Optional<User> obj = usersRepo.findBycpf(objDto.getCpf());
+        Optional<User> obj = usersRepo.findByCpf(objDto.getCpf());
         if (obj.isPresent() && obj.get().getId() != objDto.getId()) {
             throw  new DataIntegrityViolationException("CPF já cadastrado no sistema!");
         }
-        Optional<User>obj2 = usersRepo.findByEmail(objDto.getEmail());
-        if(obj2.isPresent()&&obj2.get().getId()!=objDto.getId()){
+        obj= usersRepo.findByEmail(objDto.getEmail());
+        if(obj.isPresent()&& obj.get().getId()!= objDto.getId()){
             throw new DataIntegrityViolationException("Email já cadastrado no sistema");
         }
 

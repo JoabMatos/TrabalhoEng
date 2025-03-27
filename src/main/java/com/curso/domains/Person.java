@@ -34,7 +34,8 @@ public abstract class Person {
     @CollectionTable(name = "perfis")
     protected Set<Integer> personType=new HashSet<>();
 
-    public Person() { addPersonType(PersonType.USER);}
+    public Person() { addPersonType(PersonType.USER)
+   ;}
 
     public Person(Long id, String firstName, String lastName, String cpf, String email, String password) {
         this.id = id;
@@ -45,6 +46,7 @@ public abstract class Person {
         this.password = password;
         addPersonType(PersonType.USER);
     }
+
 
     public Long getId() {
         return id;
@@ -121,4 +123,5 @@ public abstract class Person {
     public int hashCode() {
         return Objects.hash(id, cpf);
     }
+
 }

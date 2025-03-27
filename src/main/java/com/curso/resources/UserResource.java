@@ -14,6 +14,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+
 @RestController
 @RequestMapping(value = "/user")
 public class UserResource {
@@ -28,19 +29,19 @@ public class UserResource {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<UserDTO> findById(@PathVariable Long id) {
-        User obj = usersService.findById(id);
+        User obj = this.usersService.findbyId(id);
         return ResponseEntity.ok().body(new UserDTO(obj));
     }
 
     @GetMapping(value = "/cpf/{cpf}")
     public ResponseEntity<UserDTO> findByCpf(@PathVariable String cpf) {
-        User obj = this.usersService.findByCpf(cpf);
+        User obj = this.usersService.findbyCpf(cpf);
         return ResponseEntity.ok().body(new UserDTO(obj));
     }
 
     @GetMapping(value = "/email/{email}")
     public ResponseEntity<UserDTO> findByEmail(@PathVariable String email) {
-        User obj = this.usersService.findByEmail(email);
+        User obj = this.usersService.findbyEmail(email);
         return ResponseEntity.ok().body(new UserDTO(obj));
     }
     @PostMapping

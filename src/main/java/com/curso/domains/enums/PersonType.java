@@ -8,16 +8,16 @@ public enum PersonType {
     private Integer id;
     private String personType;
 
-    PersonType(int id, String personType) {
+    PersonType(Integer id, String personType) {
         this.id = id;
         this.personType = personType;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

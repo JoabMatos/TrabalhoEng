@@ -10,6 +10,7 @@ import java.util.UUID;
 public class ServiceOrderDTO {
 
     private UUID id;
+
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate starDate= LocalDate.now();
 
@@ -40,7 +41,7 @@ public class ServiceOrderDTO {
         this.endDate = serviceOrder.getEndDate();
         this.titleOS = serviceOrder.getTitleOS();
         this.description = serviceOrder.getDescription();
-        this.orderPriority = serviceOrder.getOrderPriority().ordinal();
+        this.orderPriority = serviceOrder.getOrderPriority().getId();
         this.orderStatus = serviceOrder.getOrderStatus().getId();
         this.technician = serviceOrder.getTechnician().getId();
         this.user = serviceOrder.getUser().getId();

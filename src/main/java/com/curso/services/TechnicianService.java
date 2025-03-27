@@ -23,17 +23,17 @@ public class TechnicianService {
                 .map(obj -> new TechnicianDTO(obj)).collect(Collectors.toList());
     }
 
-    public Technician findById(Long id) {
+    public Technician findbyId(Long id) {
         Optional<Technician> obj = techRepo.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id:" + id));
     }
 
-    public Technician findByCpf(String cpf) {
+    public Technician findbyCpf(String cpf) {
         Optional<Technician> obj = techRepo.findByCpf(cpf);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! CPF:" + cpf));
     }
 
-    public Technician findByEmail(String email) {
+    public Technician findbyEmail(String email) {
         Optional<Technician> obj = techRepo.findByEmail(email);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Email:" + email));
     }
@@ -49,17 +49,17 @@ public class TechnicianService {
 
     public Technician update(Long id ,TechnicianDTO objDto) {
         objDto.setId(id);
-        Technician oldObj=findById(id);
+        Technician oldObj=findbyId(id);
         ValidaPorCPFeEmail(objDto);
         oldObj=new Technician(objDto);
         return techRepo.save(oldObj);
     }
     public void delete(Long id) {
-        Technician obj=findById(id);
+        Technician obj=findbyId(id);
         if(obj.getServiceOrders().size()>0){
             throw new DataIntegrityViolationException("Técnico não pode ser deletado pois possui ordens de serviço!");
         }
-        techRepo.delete(obj);
+        techRepo.deleteById(id);
 
 
             }
@@ -69,7 +69,7 @@ public class TechnicianService {
             throw  new DataIntegrityViolationException("CPF já cadastrado no sistema!");
         }
         Optional<Technician>obj2 = techRepo.findByEmail(objDto.getEmail());
-        if(obj2.isPresent()&&obj2.get().getId()!=objDto.getId()){
+        if(obj2.isPresent()&& obj2.get().getId()!= objDto.getId()){
             throw new DataIntegrityViolationException("Email já cadastrado no sistema");
         }
 

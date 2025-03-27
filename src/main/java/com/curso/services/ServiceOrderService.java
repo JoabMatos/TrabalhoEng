@@ -28,7 +28,7 @@ public class ServiceOrderService {
     @Autowired
     private UserService userService;
 
-    public ServiceOrder findById(UUID id) {
+    public ServiceOrder findbyId(UUID id) {
         Optional<ServiceOrder> obj = serviceRepo.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Chamado não encontrado! Id:" + id));
     }
@@ -39,8 +39,8 @@ public class ServiceOrderService {
     }
 
     private  ServiceOrder newsServiceOrder(ServiceOrderDTO obj) {
-        Technician tech =techService.findById(obj.getTechnician());
-        User user = userService.findById(obj.getUser());
+        Technician tech =techService.findbyId(obj.getTechnician());
+        User user = userService.findbyId(obj.getUser());
 
         ServiceOrder os = new ServiceOrder();
         if(obj.getId()!=null){
@@ -62,7 +62,7 @@ public class ServiceOrderService {
     }
     public ServiceOrder update(UUID id,ServiceOrderDTO objDto) {
         objDto.setId(id);
-        ServiceOrder oldObj=findById(id);
+        ServiceOrder oldObj=findbyId(id);
         oldObj=newsServiceOrder(objDto);
         return serviceRepo.save(oldObj);
     }

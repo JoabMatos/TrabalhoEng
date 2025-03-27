@@ -114,11 +114,11 @@ public class TechnicianDTO {
     }
 
     public Set<PersonType> getPersonType() {
-        return personType==null ? Collections.emptySet() :
+        return personType == null ? Collections.emptySet() :
                 personType.stream().map(PersonType::toEnum).collect(Collectors.toSet());
     }
 
-    public void setPersonType(PersonType personType) {
+    public void addPersonType(PersonType personType) {
         this.personType.add(personType.getId());
     }
 }
