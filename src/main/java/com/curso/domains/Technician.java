@@ -18,7 +18,7 @@ public class Technician extends Person {
 
     @JsonIgnore
     @OneToMany(mappedBy = "technician")
-    private List<ServiceOrder> serviceOrders;
+    private List<ServiceOrder> serviceOrders =new ArrayList<>();
 
     public Technician(Long id, String firstName, String lastName, String cpf, String email, String password) {
         super(id, firstName, lastName, cpf, email, password);

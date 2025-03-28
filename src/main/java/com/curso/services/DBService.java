@@ -29,6 +29,8 @@ public class DBService {
     @Autowired
     private ServiceOrderRepository osRepo;
 
+    @Autowired
+    private Veiculo veiculo;
 
     public void initDB(){
 
@@ -68,6 +70,8 @@ public class DBService {
         userRepo.save(user01);
         userRepo.save(user02);
         osRepo.save(os01);
+
+        Veiculo veiculo01=new Veiculo(null,"Ford",new BigDecimal("200"),"Joao","15454665815");
     }
 
 }
